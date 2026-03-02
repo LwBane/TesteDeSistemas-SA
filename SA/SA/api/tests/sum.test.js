@@ -1,3 +1,5 @@
+// toBe
+
 test('soma de dois mais dois', () => {
     expect(2+2).toBe(4); // esse toBe é o valor que ele ta recebendo 
 })
@@ -37,6 +39,23 @@ const produtoB = {
     preco: 15.90
 }
 
+// toEqual
+
+const obj1 = {
+    nome: "teste",
+    idade: 12
+}
+const obj2 = {
+    nome: "teste",
+    idade: 12
+}
+
+test('Dois objetos iguais', () => {
+    expect(obj1).toEqual(obj2);
+})
+
+// Atividade comparação de objetos
+
 describe("TesteComparacaoIgual", () => {
 
     test('Produtos com mesmo valor', () => {
@@ -62,4 +81,22 @@ describe("TesteComparacaoDiferente", () => {
         expect(produtoC).not.toEqual(produtoD)
     });
 
+})
+
+// toThrow (error?)
+
+// test('Testando a função de soma externa', () => {
+//     expect(() => sum(2, 'a')).toThrow('Os valores precisam ser numéricos');
+// })
+
+// test('Testando a função de nomes', () => {
+//     expect(() => nome('Senai')).toThrow('Nome inválido');
+// })
+
+test('Testando a função de nomes', () => {
+   try {
+    expect (() => nome('Senai'))
+   } catch (error) {
+    error.message()
+   }
 })
