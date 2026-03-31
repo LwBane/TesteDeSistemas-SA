@@ -1,16 +1,14 @@
 # ENTREGA 01: Requisitos Funcionais
 
-**Sistema:** _______________________________
+**Sistema:** Sistema de Gerenciamento de Biblioteca - Controle Pessoal 
 
 | ID | Requisito | Descrição |
 |----|-----------|-----------|
-|  RF-Login |    Login       |     Login do sistema      |
-|  RF-Cadastro |    Cadastro    |     Cadastro de usuário      |
-|  RF-Perfil |    Perfil      |     Perfil do usuário      |
-|  RF-Pesquisa |    Pesquisa    |     Pesquisa de produtos      |
-|  RF-Carrinho |    Carrinho    |     Carrinho de compras      |
-|  RF-Pagamento |    Pagamento   |     Pagamento de compras      |
-|  RF-Notificação |    Notificação |     Notificação de produtos      |
-|  RF-Relatórios |    Relatórios  |     Relatórios de vendas      |
-|  RF-Notificação |    Notificação |     Notificação de produtos      |
-|  RF-Relatórios |    Relatórios  |     Relatórios de vendas      |
+| RF-01 | Cadastro de Usuário | O sistema deve permitir cadastrar usuários com nome e e-mail |
+| RF-02 | Login | O sistema deve autenticar usuários com e-mail e senha |
+| RF-03 | Cadastro de Livro | O sistema deve permitir cadastrar novos livros com título, autor, gênero e quantidade |
+| RF-04 | Listagem de Livros | O sistema deve listar todos os livros disponíveis no acervo |
+| RF-05 | Busca de Livro | O sistema deve permitir buscar livros por título ou autor |
+
+
+
