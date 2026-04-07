@@ -1,10 +1,13 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express'
+import { criarUsuario, listarUsuarios } from '../controllers/usuarioController.js'
 
-const { handleCreateAccount } = require('../controllers/user.js');
+const router = Router()
 
-router.post('/create', async (req, res) => {
-	await handleCreateAccount(req, res);
-});
+router.post('/user', criarUsuario)
+router.get('/users', listarUsuarios)
+router.delete('/users/:id', deletaUsuario)
 
-module.exports = router;
+
+export default router
+
+

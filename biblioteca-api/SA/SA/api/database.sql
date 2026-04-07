@@ -1,14 +1,28 @@
-CREATE DATABASE IF NOT EXISTS kennel_shop;
-USE kennel_shop;
+CREATE DATABASE IF NOT EXISTS biblioteca_api;
+USE biblioteca_api;
 
-CREATE TABLE IF NOT EXISTS animals (
+-- // Tabela de livros // 
+
+CREATE TABLE IF NOT EXISTS livro (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    species VARCHAR(255) NOT NULL,
-    age INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL
+    titulo VARCHAR(255) NOT NULL,
+    autor VARCHAR(255) NOT NULL,
+    genero VARCHAR(100) NOT NULL,
+    quantidade INT NOT NULL DEFAULT 0
 );
 
-INSERT INTO animals (name, species, age, price) VALUES
-('Buddy', 'Golden Retriever', 2, 500.00),
-('Mittens', 'Siamese Cat', 1, 200.00);
+-- == Populando a tabela == 
+
+INSERT INTO livro (titulo, autor, genero, quantidade) VALUES
+('Dom Quixote', 'Miguel de Cervantes', 'Clássico', 3),
+('O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 'Infantil', 5);
+
+
+-- // Tabela de usuários // 
+
+CREATE TABLE IF NOT EXISTS usuario (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE
+);
+
