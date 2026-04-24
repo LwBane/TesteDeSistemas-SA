@@ -8,10 +8,10 @@ const PORT = process.env.PORT || 3000
 
 app.use(express.json())
 
-// Testa conexão com o banco ao iniciar
+// ✅ Testa conexão com PostgreSQL
 try {
-  await pool.getConnection()
-  console.log('Conectado ao MySQL')
+  await pool.query('SELECT 1')
+  console.log('Conectado ao PostgreSQL')
 } catch (err) {
   console.error('Erro ao conectar ao banco:', err.message)
   process.exit(1)

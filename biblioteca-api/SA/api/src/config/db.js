@@ -1,32 +1,31 @@
-import mysql from "mysql2/promise";
-import dotenv from "dotenv";
+// ==> POSTGREE
 
-dotenv.config();
+import { Pool } from 'pg'
+import dotenv from 'dotenv'
 
-export const pool = mysql.createPool({
+dotenv.config()
+
+export const pool = new Pool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-});
+  password: process.env.DB_PASS,
+  port: process.env.DB_PORT,
+})
 
-// ==> Caso fosse postgree
+// ==> MYSQL 
 
-// import { Pool } from 'pg'
-// import dotenv from 'dotenv'
+// import mysql from "mysql2/promise";
+// import dotenv from "dotenv";
 
-// dotenv.config()
+// dotenv.config();
 
-// export const pool = new Pool({
-//     host: process.env.HOST,
-//     user: process.env.USER,
-//     database: process.env.DATABASE,
-//     password: process.env.PASSWORD,
-//     max: 20,
-//     idleTimeoutMillis: 30000,
-//     connectionTimeoutMillis: 2000,
-//     maxLifetimeSeconds: 60,
-// })
+// export const pool = mysql.createPool({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASS,
+//   database: process.env.DB_NAME,
+//   waitForConnections: true,
+//   connectionLimit: 10,
+//   queueLimit: 0,
+// });

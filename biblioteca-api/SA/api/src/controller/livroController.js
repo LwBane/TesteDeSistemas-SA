@@ -8,12 +8,17 @@ export const criarLivro = async (req, res) => {
 
     const { titulo, autor, genero, quantidade } = req.body;
 
-    const [result] = await pool.query(
-      "INSERT INTO livro (titulo, autor, genero, quantidade) VALUES (?, ?, ?, ?)",
+    const result = await pool.query(
+      "INSERT INTO livro (titulo, autor, genero, quantidade) VALUES ($1, $2, $3, $4) RETURNING id",
       [titulo, autor, genero, quantidade]
     );
 
-    res.status(201).json({ id: result.insertId, titulo, autor });
+    res.status(201).json({
+      id: result.rows[0].id,
+      titulo,
+      autor
+    });
+
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -22,8 +27,9 @@ export const criarLivro = async (req, res) => {
 // ==> RF-04 — Lista todos os livros
 export const listarLivros = async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT * FROM livro");
-    res.json(rows);
+    const result = await pool.query("SELECT * FROM livro");
+    res.json(result.rows);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -38,11 +44,13 @@ export const buscarLivros = async (req, res) => {
   }
 
   try {
-    const [rows] = await pool.query(
-      "SELECT * FROM livro WHERE titulo LIKE ? OR autor LIKE ?",
+    const result = await pool.query(
+      "SELECT * FROM livro WHERE titulo ILIKE $1 OR autor ILIKE $2",
       [`%${q}%`, `%${q}%`]
     );
-    res.json(rows);
+
+    res.json(result.rows);
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -51,21 +59,23 @@ export const buscarLivros = async (req, res) => {
 // ==> RF-06 — Atualiza livro por ID
 export const atualizarLivro = async (req, res) => {
   const { id } = req.params;
+
   try {
     validateLivro(req.body);
 
     const { titulo, autor, genero, quantidade } = req.body;
 
-    const [result] = await pool.query(
-      "UPDATE livro SET titulo = ?, autor = ?, genero = ?, quantidade = ? WHERE id = ?",
+    const result = await pool.query(
+      "UPDATE livro SET titulo = $1, autor = $2, genero = $3, quantidade = $4 WHERE id = $5",
       [titulo, autor, genero, quantidade, id]
     );
 
-    if (result.affectedRows === 0) {
+    if (result.rowCount === 0) {
       return res.status(404).json({ error: "Livro não encontrado" });
     }
 
     res.json({ message: "Livro atualizado com sucesso" });
+
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -74,17 +84,19 @@ export const atualizarLivro = async (req, res) => {
 // ==> RF-07 — Deleta livro por ID
 export const deletarLivro = async (req, res) => {
   const { id } = req.params;
+
   try {
-    const [result] = await pool.query(
-      "DELETE FROM livro WHERE id = ?",
+    const result = await pool.query(
+      "DELETE FROM livro WHERE id = $1",
       [id]
     );
 
-    if (result.affectedRows === 0) {
+    if (result.rowCount === 0) {
       return res.status(404).json({ error: "Livro não encontrado" });
     }
 
     res.json({ message: "Livro deletado com sucesso" });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

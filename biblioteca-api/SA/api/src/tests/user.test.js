@@ -9,7 +9,7 @@ afterAll(async () => {
 describe('RF-01 — Cadastro de Usuário', () => {
   
   beforeEach(async () => {
-    await pool.query("DELETE FROM usuario WHERE email = 'teste@email.com'")
+    await pool.query('TRUNCATE TABLE usuario RESTART IDENTITY CASCADE')
   })
 
   test('CT-01 — Deve cadastrar usuário com dados válidos', async () => {
@@ -67,7 +67,8 @@ describe('RF-01 — Cadastro de Usuário', () => {
 describe('RF-02 — Login', () => {
 
   beforeAll(async () => {
-    await pool.query("DELETE FROM usuario WHERE email = 'login@email.com'")
+    await pool.query('TRUNCATE TABLE usuario RESTART IDENTITY CASCADE')
+
     await request(app)
       .post('/usuarios')
       .send({ nome: 'Login Teste', email: 'login@email.com', senha: '123456' })
