@@ -1,21 +1,41 @@
-import { useState } from "react";
-import AnimalList from "./components/AnimalList";
-import AnimalForm from "./components/AnimalForm";
+import { useState } from "react"
+import LoginPage from "./pages/LoginPage"
+import RegisterPage from "./pages/RegisterPage"
+import DashboardPage from "./pages/DashboardPage"
 
 function App() {
-  const [refresh, setRefresh] = useState(0);
+  const [page, setPage] = useState("login") // "login" | "register" | "dashboard"
+  const [usuario, setUsuario] = useState(null)
 
-  const handleRefresh = () => {
-    setRefresh((prev) => prev + 1);
-  };
+  const handleLoginSuccess = (userData) => {
+    setUsuario(userData)
+    setPage("dashboard")
+  }
+
+  const handleLogout = () => {
+    setUsuario(null)
+    setPage("login")
+  }
+
+  if (page === "register") {
+    return (
+      <RegisterPage
+        onRegisterSuccess={() => setPage("login")}
+        onGoToLogin={() => setPage("login")}
+      />
+    )
+  }
+
+  if (page === "dashboard") {
+    return <DashboardPage usuario={usuario} onLogout={handleLogout} />
+  }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Kennel Shop Inventory</h1>
-      <AnimalForm onAnimalAdded={handleRefresh} />
-      <AnimalList refreshTrigger={refresh} />
-    </div>
-  );
+    <LoginPage
+      onLoginSuccess={handleLoginSuccess}
+      onGoToRegister={() => setPage("register")}
+    />
+  )
 }
 
-export default App;
+export default App
