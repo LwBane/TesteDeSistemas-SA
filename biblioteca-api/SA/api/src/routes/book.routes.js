@@ -3,11 +3,10 @@ import { criarLivro, listarLivros, buscarLivros, deletarLivro } from '../control
 
 const router = Router()
 
-router.post('/cadastrar-livro', criarLivro)
+router.post('/', criarLivro)
 router.get('/', listarLivros)
-router.get('/buscar', buscarLivros)
+router.get('/busca', buscarLivros)
 router.delete('/:id', deletarLivro)
-
 
 export default router
 

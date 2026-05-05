@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000
 
 app.use(express.json())
 
-// ✅ Testa conexão com PostgreSQL
+// Testa conexão com PostgreSQL
 try {
   await pool.query('SELECT 1')
   console.log('Conectado ao PostgreSQL')
