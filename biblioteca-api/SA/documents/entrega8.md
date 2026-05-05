@@ -9,7 +9,7 @@ A tabela abaixo relaciona os casos de teste aos requisitos funcionais do sistema
 |------------------|------------------------|-----------|-------------|--------|--------------------|
 | CT-01 | RF-01 | Cadastrar usuário com dados válidos | Banco de dados disponível | 1. Enviar POST /users com nome e e-mail válidos<br>2. Verificar resposta da API | Retorna status 201 e os dados do usuário criado |
 | CT-02 | RF-01 | Tentar cadastrar usuário com e-mail já existente | Usuário com mesmo e-mail já cadastrado | 1. Enviar POST /users com e-mail duplicado<br>2. Verificar resposta da API | Retorna status 400 com mensagem de erro |
-| CT-03 | RF-Login | Validar login com dados válidos | Usuário cadastrado no sistema | 1. Acessar tela de login<br>2. Informar e‑mail e senha válidos<br>3. Clicar em entrar | Usuário acessa o dashboard |
+| CT-03 | RF-02 | Validar login com dados válidos | Usuário cadastrado no sistema | 1. Acessar tela de login<br>2. Informar e‑mail e senha válidos<br>3. Clicar em entrar | Usuário acessa o dashboard |
 
 ---
 
