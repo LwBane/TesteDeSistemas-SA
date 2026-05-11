@@ -10,7 +10,7 @@ export const validateUsuario = ({ nome, email, senha }) => {
     throw new Error("Nome deve ter pelo menos 2 caracteres")
   }
   // e-mail é válido
-  if (!email.includes("@")) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     throw new Error("E-mail inválido")
   }
   // Se a senha tem pelo menos 6 caracteres
@@ -27,7 +27,7 @@ export const validateLogin = ({ email, senha }) => {
     throw new Error("E-mail e senha são obrigatórios")
   }
   // Verifica se o e-mail é válido
-  if (!email.includes("@")) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     throw new Error("E-mail inválido")
   }
 }
