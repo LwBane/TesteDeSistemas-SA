@@ -1,40 +1,29 @@
-import { useState } from "react"
-import LoginPage from "./pages/LoginPage"
-import RegisterPage from "./pages/RegisterPage"
-import DashboardPage from "./pages/DashboardPage"
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
+import DashboardLayout from './layouts/DashboardLayout'
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import RegisterBook from './pages/RegisterBook'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
-  const [page, setPage] = useState("login") // "login" | "register" | "dashboard"
-  const [usuario, setUsuario] = useState(null)
-
-  const handleLoginSuccess = (userData) => {
-    setUsuario(userData)
-    setPage("dashboard")
-  }
-
-  const handleLogout = () => {
-    setUsuario(null)
-    setPage("login")
-  }
-
-  if (page === "register") {
-    return (
-      <RegisterPage
-        onRegisterSuccess={() => setPage("login")}
-        onGoToLogin={() => setPage("login")}
-      />
-    )
-  }
-
-  if (page === "dashboard") {
-    return <DashboardPage usuario={usuario} onLogout={handleLogout} />
-  }
-
   return (
-    <LoginPage
-      onLoginSuccess={handleLoginSuccess}
-      onGoToRegister={() => setPage("register")}
-    />
+    <BrowserRouter>
+      <Routes>
+        {/* Página pública */}
+        <Route path='/' element={<Login />} />
+
+        {/* Páginas protegidas */}
+        <Route element={<PrivateRoute />}>
+          <Route element={<DashboardLayout />}>
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/livros/cadastrar' element={<RegisterBook />} />
+          </Route>
+        </Route>
+
+        {/* Rota não encontrada */}
+        <Route path='*' element={<Navigate to='/' />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

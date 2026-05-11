@@ -1,0 +1,71 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "joao@email.com",
+      "password": "abcd1234"
+    }
+  ],
+  "livros": [
+    {
+      "id": "1",
+      "titulo": "O Senhor dos Anéis",
+      "autor": "J.R.R. Tolkien",
+      "genero": "Fantasia",
+      "ano": 1954
+    },
+    {
+      "id": "2",
+      "titulo": "Dom Casmurro",
+      "autor": "Machado de Assis",
+      "genero": "Romance",
+      "ano": 1899
+    },
+    {
+      "titulo": "The Cruel Prince (The Folk of the Air)",
+      "autor": "Holly Black",
+      "genero": "Fairies--Fiction.",
+      "ano": 2018,
+      "id": "BuXXhMqhQl4"
+    },
+    {
+      "titulo": "The Cruel Prince (The Folk of the Air)",
+      "autor": "Holly Black",
+      "genero": "Fairies--Fiction.",
+      "ano": 2018,
+      "id": "ptu3M9P6nNw"
+    }
+  ],
+  "colecoes": [
+    {
+      "nome": "dev2",
+      "livros": [],
+      "id": "lxd1XglwiEE"
+    },
+    {
+      "nome": "dev23",
+      "livros": [],
+      "id": "f0RiC_nRDOM"
+    },
+    {
+      "nome": "oi2",
+      "livros": [],
+      "id": "CafHkYK9phM"
+    },
+    {
+      "nome": "teste",
+      "livros": [
+        "1"
+      ],
+      "id": "q8s51zCz4aI"
+    },
+    {
+      "nome": "cansei2",
+      "livros": [
+        "1"
+      ],
+      "id": "GnvTJ3O7Tnk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

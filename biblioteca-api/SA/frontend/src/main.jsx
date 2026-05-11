@@ -2,37 +2,41 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 
-// ==> React Router 
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
+import { createBrowserRouter } from 'react-router'
+import { RouterProvider } from 'react-router-dom'
 
-// ==> Toastify
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import { AuthProvider } from './contexts/AuthContext';
-import PrivateRoute from './components/PrivateRoute';
-import DashboardLayout from './layouts/DashboardLayout';
+import Login from './pages/Login'
+import Dashboard from './pages/Dashboard'
+import RegisterBook from './pages/RegisterBook'
+import BookDetails from './pages/BookDetails/index'
+import Collections from './pages/Collections/index'
+import { AuthProvider } from './contexts/AuthContext'
+import PrivateRoute from './components/PrivateRoute'
+import DashboardLayout from './layouts/DashboardLayout'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Login />
   },
   {
-    path: "/dashboard",
-    element: (
-      <PrivateRoute>
-        <DashboardLayout />
-      </PrivateRoute>
-    ), 
+    element: <PrivateRoute />,
     children: [
-        {path: "/dashboard", element: <Dashboard />}
+      {
+        element: <DashboardLayout />,
+        children: [
+          { path: '/dashboard', element: <Dashboard /> },
+          { path: '/livros/cadastrar', element: <RegisterBook /> },
+          { path: '/livros/:id', element: <BookDetails /> },
+          { path: '/colecoes', element: <Collections /> },
+        ]
+      }
     ]
-  },
-]);
+  }
+])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

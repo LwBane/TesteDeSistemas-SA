@@ -1,27 +1,22 @@
-import { Link, useNavigate } from 'react-router'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import {
-    MdDashboard,
     MdExitToApp,
-    MdMenu,
-    MdClose
 } from 'react-icons/md'
 
 import {
-    FaUserPlus,
-    FaListAlt,
-    FaCalendarCheck
+    FaBook,
+    FaBookMedical,
+    FaLayerGroup
 } from 'react-icons/fa'
 
 import { useAuth } from '../../contexts/AuthContext'
-import { useState } from 'react'
+import logo from '../../assets/images/logo-biblioteca.png'
 
 const SideMenu = () => {
-    const navigate = useNavigate() 
+    const navigate = useNavigate()
+    const location = useLocation()
 
-    const {logout} = useAuth() 
-
-    // Controle do menu sanfonado
-    const [isCollapsed, setIsCollapsed] = useState(false)
+    const { logout } = useAuth()
 
     // Função do logout 
     const handleLogout = () => {
@@ -29,87 +24,87 @@ const SideMenu = () => {
         navigate('/')
     }
 
-    // Função toggle menu 
-    const toggleMenu = () => {
-        setIsCollapsed(!isCollapsed) // Para que o botão tenha a mesma funcionalidade, aqui eu estou criando uma interação dinâmica, pode ser tanto true como false
-    }
+    const isActive = (path) => location.pathname === path
+
+    const linkStyle = (path) => ({
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
+        padding: '10px 12px',
+        borderRadius: '8px',
+        color: isActive(path) ? '#3B2314' : '#5a5a5a',
+        backgroundColor: isActive(path) ? '#E0D5C8' : 'transparent',
+        fontWeight: isActive(path) ? '600' : '400',
+        textDecoration: 'none',
+        transition: 'background-color 0.15s, color 0.15s',
+        fontSize: '0.95rem',
+    })
 
     return (
-        <aside className={`h-screen bg-cyan-800 text-white flex flex-col justify-between transition-all duration-300 ${
-            isCollapsed? 'w-20' : 'w-64'
-        }`}> 
-        
-            {/* Topo - Botão toggle */}
-            <div className='p-4 flex items-center justify-between border-b border-cyan-700'>
-                {
-                    !isCollapsed && (
-                        <h1 className='text-lg font-bold'>Clínica +</h1>
-                    )
-                }
-                <button
-                onClick={toggleMenu}
-                className='text-white hover:text-cyan-300 focus:outline-none'
-                >
-                    {isCollapsed ? <MdMenu size={24}/> : <MdClose size = {24} /> } 
-                    {/* Aqui em cima é só pra dizer que se estiver comprimido aparecerá um close, se não, o menu inteiro */}
-                </button>  
-            </div>
+        <aside className='h-screen flex flex-col justify-between' style={{ backgroundColor: '#FFFFFF', borderRight: '1.5px solid #E0D5C8', width: '220px', flexShrink: 0 }}>
 
-            {/* Menu */}
-            <nav className='flex-1 p-4 space-y-4 overflow-y-auto'>
-                <ul className='space-y-3'>
-                    <li>
-                        <Link 
-                        to="/dashboard"
-                        className='flex items-center gap-3 hover:text-cyan-300'
-                        >
-                            <MdDashboard size={20} /> 
-                            {!isCollapsed && <span>Início</span>}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                        to="/pacientes"
-                        className='flex items-center gap-3 hover:text-cyan-300'
-                        >
-                            <FaUserPlus size={20} /> 
-                            {!isCollapsed && <span>Pacientes</span>}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                        to="/consultas"
-                        className='flex items-center gap-3 hover:text-cyan-300'
-                        >
-                            <FaCalendarCheck size={20} /> 
-                            {!isCollapsed && <span>Consultas</span>}
-                        </Link>
-                    </li>
-                    <li>
-                        <Link 
-                        to="/exames"
-                        className='flex items-center gap-3 hover:text-cyan-300'
-                        >
-                            <FaListAlt size={20} /> 
-                            {!isCollapsed && <span>Exames</span>}
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
+            {/* Logo */}
+            <div>
+                <div className='p-5 flex items-center justify-center' style={{ borderBottom: '1px solid #E0D5C8' }}>
+                    <img src={logo} alt='Biblioteca' style={{ width: '130px', objectFit: 'contain' }} />
+                </div>
+
+                {/* Menu */}
+                <nav className='p-4'>
+                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        <li>
+                            <Link
+                                to="/dashboard"
+                                style={linkStyle('/dashboard')}
+                                onMouseEnter={(e) => { if (!isActive('/dashboard')) { e.currentTarget.style.backgroundColor = '#F5F0EA'; e.currentTarget.style.color = '#3B2314' } }}
+                                onMouseLeave={(e) => { if (!isActive('/dashboard')) { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#5a5a5a' } }}
+                            >
+                                <FaBook size={18} />
+                                <span>Minha Biblioteca</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/livros/cadastrar"
+                                style={linkStyle('/livros/cadastrar')}
+                                onMouseEnter={(e) => { if (!isActive('/livros/cadastrar')) { e.currentTarget.style.backgroundColor = '#F5F0EA'; e.currentTarget.style.color = '#3B2314' } }}
+                                onMouseLeave={(e) => { if (!isActive('/livros/cadastrar')) { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#5a5a5a' } }}
+                            >
+                                <FaBookMedical size={18} />
+                                <span>Cadastrar Livro</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to="/colecoes"
+                                style={linkStyle('/colecoes')}
+                                onMouseEnter={(e) => { if (!isActive('/colecoes')) { e.currentTarget.style.backgroundColor = '#F5F0EA'; e.currentTarget.style.color = '#3B2314' } }}
+                                onMouseLeave={(e) => { if (!isActive('/colecoes')) { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#5a5a5a' } }}
+                            >
+                                <FaLayerGroup size={18} />
+                                <span>Coleções</span>
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
             {/* Botão sair */}
-            <div className='p-4 border-t border-cyan-700'>
-                <button 
+            <div className='p-4' style={{ borderTop: '1px solid #E0D5C8' }}>
+                <button
                     onClick={handleLogout}
-                    className='flex items-center gap-3 text-red-300 hover:text-red-500 w-full cursor-pointer'
-                    >
-                        <MdExitToApp size={20} /> 
-                        {!isCollapsed && <span>Sair</span>}
-                    </button>
+                    className='flex items-center gap-3 w-full cursor-pointer'
+                    style={{ color: '#9E8C7E', fontSize: '0.95rem', background: 'none', border: 'none', padding: '10px 12px', borderRadius: '8px' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#F5F0EA'; e.currentTarget.style.color = '#3B2314' }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#9E8C7E' }}
+                >
+                    <MdExitToApp size={20} />
+                    <span>Sair</span>
+                </button>
             </div>
 
-        </aside> // aside é uma tag de semântica para criar coisas laterais 
-            
+        </aside>
+
     )
 }
 
