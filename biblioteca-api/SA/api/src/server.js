@@ -30,8 +30,11 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Rota não encontrada' })
 })
 
-app.listen(PORT, () => {
-  console.log(`Aplicação rodando em: http://localhost:${PORT}`)
-})
+// Só sobe o servidor se não estiver em ambiente de teste
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Aplicação rodando em: http://localhost:${PORT}`)
+  })
+}
 
 export default app
