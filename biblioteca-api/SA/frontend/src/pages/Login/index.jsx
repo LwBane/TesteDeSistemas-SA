@@ -1,21 +1,28 @@
-import React from 'react'
-
-import logo from '../../assets/images/logo-biblioteca.png'
-import LoginForm from '../../components/LoginForm'
+import React from "react";
+import logo from "../../assets/images/logo-biblioteca.png";
+import LoginForm from "../../components/LoginForm";
 
 const Login = () => {
-    return (
-        <>
-            <div className='flex min-h-screen bg-gray-100'>
-                <div className='hidden md:flex w-1/2 bg-gray-200 flex-col items-center justify-center p-8'>
-                <img src={logo} alt='biblioteca' className='mb-6' />
-                </div>
-                <div className='flex w-full md:w-1/2 items-center justify-center p-8'>
-                    <LoginForm />
-                </div>
-            </div>
-        </>
-    )
-}
+  return (
+    <div className="flex min-h-screen" style={{ backgroundColor: "#F5F0EA" }}>
+      {/* Lado esquerdo — logo */}
+      <div
+        className="hidden md:flex w-1/2 flex-col items-center justify-center p-8"
+        style={{ backgroundColor: "#EDE8E0" }}
+      >
+        <img
+          src={logo}
+          alt="biblioteca"
+          className="w-full max-w-sm object-contain"
+        />
+      </div>
 
-export default Login
+      {/* Lado direito — formulário */}
+      <div className="flex w-full md:w-1/2 items-center justify-center p-8">
+        <LoginForm />
+      </div>
+    </div>
+  );
+};
+
+export default Login;
