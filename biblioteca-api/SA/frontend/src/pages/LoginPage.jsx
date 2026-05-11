@@ -12,8 +12,8 @@ function LoginPage({ onLoginSuccess, onGoToRegister }) {
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e) => {
-    e.preventDefault()  
-    setErro("")         
+    e.preventDefault()
+    setErro("")
     setLoading(true)
 
     try {
@@ -34,26 +34,41 @@ function LoginPage({ onLoginSuccess, onGoToRegister }) {
   }
 
   return (
-    <div className="min-h-screen bg-stone-950 flex items-center justify-center px-4">
+    <div
+      className="min-h-screen flex items-center justify-center px-4"
+      style={{ backgroundColor: "#F5F0EA" }}
+    >
       <div className="w-full max-w-sm">
 
-        {/* Header — título e subtítulo da página */}
+        {/* Header — logo e subtítulo */}
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-amber-400 tracking-tight">
+          <h1
+            className="text-5xl font-bold tracking-tight"
+            style={{ color: "#3B2314", fontFamily: "Georgia, serif" }}
+          >
             Biblioteca
           </h1>
-          <p className="text-stone-400 mt-2 text-sm">
-            Acesse sua conta para continuar
+          <p className="mt-2 text-sm flex items-center justify-center gap-1"
+            style={{ color: "#9E8C7E", fontFamily: "Georgia, serif", fontStyle: "italic" }}>
+            <span style={{ color: "#E8A0A0" }}>♥</span>
+            sua coleção, suas histórias
+            <span style={{ color: "#E8A0A0" }}>♥</span>
           </p>
         </div>
 
-        {/* Card — contém o formulário de login */}
-        <div className="bg-stone-900 border border-stone-800 rounded-2xl p-8 shadow-xl">
+        {/* Card — formulário de login */}
+        <div
+          className="rounded-2xl p-8 shadow-lg"
+          style={{ backgroundColor: "#FFFFFF", border: "1.5px solid #E0D5C8" }}
+        >
           <form onSubmit={handleSubmit} data-testid="login-form">
 
             {/* Campo e-mail */}
             <div className="mb-5">
-              <label className="block text-stone-300 text-sm font-medium mb-1">
+              <label
+                className="block text-sm font-medium mb-1"
+                style={{ color: "#3B2314" }}
+              >
                 E-mail
               </label>
               <input
@@ -62,14 +77,24 @@ function LoginPage({ onLoginSuccess, onGoToRegister }) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="w-full bg-stone-800 border border-stone-700 text-stone-100 rounded-lg px-4 py-2.5 text-sm placeholder-stone-500 focus:outline-none focus:border-amber-400 transition-colors"
+                className="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-colors"
+                style={{
+                  backgroundColor: "#FAF7F3",
+                  border: "1.5px solid #D9CFC4",
+                  color: "#3B2314",
+                }}
+                onFocus={e => e.target.style.borderColor = "#7D9E8C"}
+                onBlur={e => e.target.style.borderColor = "#D9CFC4"}
                 required
               />
             </div>
 
             {/* Campo senha */}
             <div className="mb-6">
-              <label className="block text-stone-300 text-sm font-medium mb-1">
+              <label
+                className="block text-sm font-medium mb-1"
+                style={{ color: "#3B2314" }}
+              >
                 Senha
               </label>
               <input
@@ -78,7 +103,14 @@ function LoginPage({ onLoginSuccess, onGoToRegister }) {
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
                 placeholder="••••••"
-                className="w-full bg-stone-800 border border-stone-700 text-stone-100 rounded-lg px-4 py-2.5 text-sm placeholder-stone-500 focus:outline-none focus:border-amber-400 transition-colors"
+                className="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-colors"
+                style={{
+                  backgroundColor: "#FAF7F3",
+                  border: "1.5px solid #D9CFC4",
+                  color: "#3B2314",
+                }}
+                onFocus={e => e.target.style.borderColor = "#7D9E8C"}
+                onBlur={e => e.target.style.borderColor = "#D9CFC4"}
                 required
               />
             </div>
@@ -87,30 +119,41 @@ function LoginPage({ onLoginSuccess, onGoToRegister }) {
             {erro && (
               <p
                 data-testid="login-erro"
-                className="text-red-400 text-sm mb-4 text-center"
+                className="text-sm mb-4 text-center"
+                style={{ color: "#C0524A" }}
               >
                 {erro}
               </p>
             )}
 
-            {/* Botão de submit — desabilitado durante o loading */}
+            {/* Botão de submit */}
             <button
               data-testid="login-btn"
               type="submit"
               disabled={loading}
-              className="w-full bg-amber-400 hover:bg-amber-300 text-stone-950 font-semibold rounded-lg py-2.5 text-sm transition-colors disabled:opacity-50"
+              className="w-full font-semibold rounded-lg py-2.5 text-sm transition-colors"
+              style={{
+                backgroundColor: loading ? "#A8C4B8" : "#7D9E8C",
+                color: "#FFFFFF",
+                cursor: loading ? "not-allowed" : "pointer",
+              }}
+              onMouseEnter={e => { if (!loading) e.target.style.backgroundColor = "#6A8C7A" }}
+              onMouseLeave={e => { if (!loading) e.target.style.backgroundColor = "#7D9E8C" }}
             >
               {loading ? "Entrando..." : "Entrar"}
             </button>
           </form>
 
           {/* Link para a página de cadastro */}
-          <p className="text-center text-stone-500 text-sm mt-6">
+          <p className="text-center text-sm mt-6" style={{ color: "#9E8C7E" }}>
             Não tem conta?{" "}
             <button
               data-testid="goto-register"
               onClick={onGoToRegister}
-              className="text-amber-400 hover:text-amber-300 font-medium transition-colors"
+              className="font-medium transition-colors"
+              style={{ color: "#E8A0A0" }}
+              onMouseEnter={e => e.target.style.color = "#D4807A"}
+              onMouseLeave={e => e.target.style.color = "#E8A0A0"}
             >
               Cadastre-se
             </button>
