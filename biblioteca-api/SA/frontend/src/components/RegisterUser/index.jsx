@@ -6,11 +6,13 @@ import axios from 'axios'
 const RegisterUser = () => {
 
     // Estados de controle dos campos 
+    const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
     // Funções que alteram o valor dos estados 
+    const handleNomeChange = (e) => setNome(e.target.value)
     const handleEmailChange = (e) => setEmail(e.target.value)
     const handlePasswordChange = (e) => setPassword(e.target.value)
     const handleConfirmPasswordChange = (e) => setConfirmPassword(e.target.value)
@@ -25,6 +27,7 @@ const RegisterUser = () => {
     const isPasswordValid = () => password.length >= 8 && password === confirmPassword 
 
     const resetForm = () => {
+        setNome('')
         setEmail('')
         setPassword('')
         setConfirmPassword('')
@@ -42,8 +45,8 @@ const RegisterUser = () => {
         setIsSaving(true)
 
         try{
-            await axios.post('http://localhost:3000/users', {
-                email, password
+            await axios.post('http://localhost:3000/usuarios', {
+                nome, email, senha: password
             })
 
             setIsSaving(false)
@@ -74,6 +77,25 @@ const RegisterUser = () => {
             </h2>
 
             <form onSubmit={handleSubmit}>
+
+                <fieldset>
+                    <label 
+                        htmlFor='nome' 
+                        className='block text-sm font-medium mb-1 text-[#3B2314]'
+                    >
+                        Nome:
+                    </label>
+
+                    <input 
+                        type='text'
+                        id='nome'
+                        value={nome}
+                        onChange={handleNomeChange}
+                        required
+                        placeholder='João Silva'
+                        className='w-full p-2 border border-[#E0D5C8] bg-[#F5F0EA] text-[#3B2314] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7D9E8C]'
+                    />
+                </fieldset>
 
                 <fieldset>
                     <label 

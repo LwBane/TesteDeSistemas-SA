@@ -2,11 +2,13 @@ import express from 'express'
 import { pool } from './config/db.js'
 import userRoutes from './routes/user.routes.js'
 import bookRoutes from './routes/book.routes.js'
+import cors from 'cors'
 
 const app = express()
 const PORT = process.env.PORT || 3000
 
 app.use(express.json())
+app.use(cors())
 
 // Testa conexão com PostgreSQL
 try {
