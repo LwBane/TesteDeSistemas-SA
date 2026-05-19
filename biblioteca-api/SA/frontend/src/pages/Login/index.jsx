@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/images/logo-biblioteca.png";
+import logo from "../../assets/images/logo-biblioteca2.png";
 import LoginForm from "../../components/LoginForm";
 
 const Login = () => {

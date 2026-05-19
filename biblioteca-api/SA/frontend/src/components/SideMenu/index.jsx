@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa'
 
 import { useAuth } from '../../contexts/AuthContext'
-import logo from '../../assets/images/logo-biblioteca.png'
+import logo from '../../assets/images/logo-biblioteca2.png'
 
 const SideMenu = () => {
     const navigate = useNavigate()
