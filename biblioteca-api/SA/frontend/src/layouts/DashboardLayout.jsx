@@ -32,7 +32,7 @@ const DashboardLayout = () => {
           </div>
           {user && (
             <div className="flex items-center gap-4" style={{ marginLeft: 'auto' }}>
-              <span style={{ color: "#3B2314" }}>Bem Vindo, {user.email}</span>
+              <span style={{ color: "#3B2314" }}>Seja bem-vindo(a), {user.email}</span>
               <button
                 onClick={logout}
                 className="px-3 py-1 text-white rounded transition"

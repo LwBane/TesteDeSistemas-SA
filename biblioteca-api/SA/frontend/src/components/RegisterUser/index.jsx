@@ -131,7 +131,7 @@ const RegisterUser = () => {
                         onChange={handlePasswordChange}
                         required
                         minLength={8} // esse tipo de validação não funciona mt, pq o usuário pode ir no html e enviar igual 
-                        placeholder='ABC123_'
+                        placeholder='abcd1234'
                         className='w-full p-2 border border-[#E0D5C8] bg-[#F5F0EA] text-[#3B2314] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7D9E8C]'
                     />
                 </fieldset>
@@ -151,7 +151,7 @@ const RegisterUser = () => {
                         onChange={handleConfirmPasswordChange}
                         required
                         minLength={8} 
-                        placeholder='ABC123_'
+                        placeholder='abcd1234'
                         className='w-full p-2 border border-[#E0D5C8] bg-[#F5F0EA] text-[#3B2314] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7D9E8C]'
                     />
 
