@@ -17,7 +17,7 @@ import RegisterUser from '../RegisterUser'
 
 const LoginForm = () => {
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [senha, setSenha] = useState("")
 
   const navigate = useNavigate()
 
@@ -40,16 +40,13 @@ const LoginForm = () => {
     e.preventDefault(); // Vai quebrar aquele evento que acontece quando clicamos no submit, que dá o refresh
 
     try {
-      const response = await axios.get(
-        "http://localhost:3000/users",
-        {
-          params: { email, password }
-        },
+      const response = await axios.post(
+        "http://localhost:3000/usuarios/login",
+        { email, senha }
       );
 
-      if (response.data.length === 0) throw new Error("Usuário não encontrado")
-
-      login(response.data[0].email);
+      // A API real retorna { message, usuario: { id, nome, email } }
+      login(response.data.usuario.email);
 
       toast.success("Login realizado com sucesso!", {
         autoClose: 2000,
@@ -105,8 +102,8 @@ const LoginForm = () => {
               type='password'
               id='password'
               minLength={6} // comprimento mínimo da senha 
-              value= {password}
-              onChange={(e) => setPassword(e.target.value)}
+              value= {senha}
+              onChange={(e) => setSenha(e.target.value)}
               required
               placeholder='••••••'
               className='w-full p-2 rounded-lg focus:outline-none transition-colors'

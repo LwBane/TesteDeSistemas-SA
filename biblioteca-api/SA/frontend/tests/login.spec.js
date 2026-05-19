@@ -47,8 +47,7 @@ test.describe('Tela de Login', () => {
         await page.fill('[data-testid="login-senha"]', 'senhaerrada')
         await page.click('[data-testid="login-btn"]')
 
-        // Verifica se o toast de erro aparece
-        await expect(page.locator('.Toastify')).toContainText('Usuário não encontrado', { timeout: 5000 })
+        await expect(page.locator('.Toastify')).toContainText('E-mail ou senha inválidos', { timeout: 5000 })
 
         // Verifica se continua na tela de login
         await expect(page.locator('[data-testid="login-form"]')).toBeVisible()
