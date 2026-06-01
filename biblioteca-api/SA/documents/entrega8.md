@@ -1,4 +1,3 @@
-
 # ENTREGA 8 — Descritivo de Casos de Teste de Software
 
 ## 8.1 Casos de Teste
@@ -30,15 +29,17 @@ A tabela abaixo relaciona os casos de teste aos requisitos funcionais do sistema
 ---
 
 ### Front-end (Playwright)
- 
+
 | ID Caso de Teste | ID Requisito Funcional | Descrição | Precondição | Passos | Resultado Esperado |
 |------------------|------------------------|-----------|-------------|--------|--------------------|
 | CT-18 | RF-06 | Verificar se a tela de login aparece | Frontend rodando | 1. Acessar localhost:5173 | Campos de e-mail e senha estão visíveis |
-| CT-19 | RF-07 | Ir para a tela de cadastro | Tela de login aberta | 1. Clicar em "Cadastre-se" | Formulário de cadastro é exibido |
-| CT-20 | RF-08 | Voltar para o login pelo cadastro | Tela de cadastro aberta | 1. Clicar em "Entrar" | Formulário de login aparece novamente |
+| CT-19 | RF-07 | Ir para a tela de cadastro | Tela de login aberta | 1. Clicar em "Criar Conta" | Formulário de cadastro é exibido |
+| CT-20 | RF-08 | Voltar para o login pelo cadastro | Tela de cadastro aberta | 1. Clicar no botão X do modal | Formulário de login aparece novamente |
 | CT-21 | RF-09 | Ver erro ao errar a senha no login | Usuário cadastrado | 1. Preencher e-mail certo e senha errada<br>2. Clicar em "Entrar" | Mensagem de erro aparece na tela |
-| CT-22 | RF-10 | Ir pro dashboard depois do login | Usuário cadastrado | 1. Preencher dados corretos<br>2. Clicar em "Entrar" | Dashboard é exibido com o nome do usuário |
- 
+| CT-22 | RF-10 | Ir pro dashboard depois do login | Usuário cadastrado | 1. Preencher dados corretos<br>2. Clicar em "Entrar" | Dashboard é exibido com os livros do usuário |
+| CT-23 | RF-11 | Verificar se os livros aparecem no dashboard | Usuário logado e livros cadastrados | 1. Realizar login<br>2. Verificar o dashboard | Título "Minha Biblioteca" e cards de livros são exibidos |
+| CT-24 | RF-12 | Filtrar livros pela barra de pesquisa | Usuário logado e livros cadastrados | 1. Realizar login<br>2. Digitar "Senhor" na barra de pesquisa | Apenas o livro "O Senhor dos Anéis" é exibido |
+| CT-25 | RF-13 | Acessar detalhes de um livro | Usuário logado e livros cadastrados | 1. Realizar login<br>2. Clicar em um card de livro | Página de detalhes do livro é exibida |
 
 ---
 
@@ -54,8 +55,8 @@ A tabela abaixo relaciona os casos de teste aos requisitos funcionais do sistema
 
 ### Ambiente de Teste
 
-- **Ambiente:** Desenvolvimento local 
-- **Servidor de Teste:** Node.js 
+- **Ambiente:** Desenvolvimento local
+- **Servidor de Teste:** Node.js
 - **Banco de Dados / Versão:** PostgreSQL
-- **Browser / Versão:** Google Chrome (última versão) 
-- **Sistema Operacional:** Windows 11 
+- **Browser / Versão:** Google Chrome (última versão)
+- **Sistema Operacional:** Windows 11
