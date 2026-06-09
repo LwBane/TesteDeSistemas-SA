@@ -5,7 +5,8 @@ CREATE TABLE IF NOT EXISTS livro (
     titulo VARCHAR(255) NOT NULL,
     autor VARCHAR(255) NOT NULL,
     genero VARCHAR(100) NOT NULL,
-    quantidade INT NOT NULL DEFAULT 0
+    quantidade INT NOT NULL DEFAULT 0,
+    ano INT
 );
 
 -- Inserindo dados
@@ -49,5 +50,3 @@ CREATE TABLE IF NOT EXISTS usuario (
 -- --     email VARCHAR(255) NOT NULL UNIQUE,
 -- --     senha VARCHAR(255) NOT NULL
 -- -- );
-
-
