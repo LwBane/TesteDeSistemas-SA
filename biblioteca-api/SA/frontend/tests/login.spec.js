@@ -20,10 +20,10 @@ test.describe('Tela de Login', () => {
         // Clica no botão Criar Conta
         await page.click('[data-testid="goto-register"]')
 
-        // Verifica se o formulário de cadastro apareceu (campo nome é exclusivo do cadastro)
+        // Verifica se o formulário de cadastro apareceu (campo nome e confirmação de senha são exclusivos do cadastro)
         await expect(page.locator('#nome')).toBeVisible()
         await expect(page.locator('input[placeholder="exemplo123@gmail.com"]')).toBeVisible()
-        await expect(page.locator('input[placeholder="abcd1234"]').first()).toBeVisible()
+        await expect(page.locator('#confirmPassword')).toBeVisible()
     })
 
     // CT-20: Estando no cadastro, fechar o modal clicando no X e voltar para o login
@@ -47,6 +47,7 @@ test.describe('Tela de Login', () => {
         await page.fill('[data-testid="login-senha"]', 'senhaerrada')
         await page.click('[data-testid="login-btn"]')
 
+        // Verifica se o toast de erro aparece (mensagem da API real)
         await expect(page.locator('.Toastify')).toContainText('E-mail ou senha inválidos', { timeout: 5000 })
 
         // Verifica se continua na tela de login
@@ -55,7 +56,7 @@ test.describe('Tela de Login', () => {
 
     // CT-22: Ir pro dashboard depois do login
     test('CT-22 — Deve realizar login com sucesso e ir para o dashboard', async ({ page }) => {
-        await page.fill('[data-testid="login-email"]', 'joao@email.com')
+        await page.fill('[data-testid="login-email"]', 'admin@gmail.com')
         await page.fill('[data-testid="login-senha"]', 'abcd1234')
         await page.click('[data-testid="login-btn"]')
 

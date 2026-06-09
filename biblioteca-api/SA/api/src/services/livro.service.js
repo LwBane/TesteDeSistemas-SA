@@ -5,13 +5,12 @@ export const validateLivro = ({ titulo, autor, genero, quantidade }) => {
   if (!titulo || !autor || !genero) {
     throw new Error("Título, autor e gênero são obrigatórios")
   }
-  // Se a quantidade foi informada
-  if (quantidade === undefined || quantidade === null) {
-    throw new Error("Quantidade é obrigatória")
-  }
-  // Quantidade é um número maior ou igual a zero
-  if (typeof quantidade !== 'number' || quantidade < 0) {
-    throw new Error("Quantidade deve ser um número maior ou igual a zero")
+  // Quantidade é opcional — só valida se foi informada
+  if (quantidade !== undefined && quantidade !== null) {
+    // Quantidade é um número maior ou igual a zero
+    if (typeof quantidade !== 'number' || quantidade < 0) {
+      throw new Error("Quantidade deve ser um número maior ou igual a zero")
+    }
   }
 }
 

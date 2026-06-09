@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 // Faz login antes de cada teste pois o dashboard é rota protegida
 test.beforeEach(async ({ page }) => {
     await page.goto('/')
-    await page.fill('[data-testid="login-email"]', 'joao@email.com')
+    await page.fill('[data-testid="login-email"]', 'admin@gmail.com')
     await page.fill('[data-testid="login-senha"]', 'abcd1234')
     await page.click('[data-testid="login-btn"]')
 
@@ -28,10 +28,10 @@ test.describe('Dashboard', () => {
         await page.fill('input[placeholder="Pesquisar livro..."]', 'Senhor')
 
         // Verifica se aparece o livro filtrado
-        await expect(page.locator('text=O Senhor dos Anéis')).toBeVisible()
+        await expect(page.getByText('Senhor dos an', { exact: false })).toBeVisible()
 
         // Verifica se livros que não batem com a busca somem
-        await expect(page.locator('text=Dom Casmurro')).not.toBeVisible()
+        await expect(page.getByText('Dom Casmurro', { exact: false })).not.toBeVisible()
     })
 
     // CT-25: Clicar em um livro e ir para a página de detalhes

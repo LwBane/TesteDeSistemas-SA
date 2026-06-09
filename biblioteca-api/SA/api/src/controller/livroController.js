@@ -6,11 +6,11 @@ export const criarLivro = async (req, res) => {
   try {
     validateLivro(req.body);
 
-    const { titulo, autor, genero, quantidade } = req.body;
+    const { titulo, autor, genero, quantidade, ano } = req.body;
 
     const result = await pool.query(
-      "INSERT INTO livro (titulo, autor, genero, quantidade) VALUES ($1, $2, $3, $4) RETURNING id",
-      [titulo, autor, genero, quantidade]
+      "INSERT INTO livro (titulo, autor, genero, quantidade, ano) VALUES ($1, $2, $3, $4, $5) RETURNING id",
+      [titulo, autor, genero, quantidade ?? 0, ano ?? null]
     );
 
     res.status(201).json({
@@ -63,11 +63,11 @@ export const atualizarLivro = async (req, res) => {
   try {
     validateLivro(req.body);
 
-    const { titulo, autor, genero, quantidade } = req.body;
+    const { titulo, autor, genero, quantidade, ano } = req.body;
 
     const result = await pool.query(
-      "UPDATE livro SET titulo = $1, autor = $2, genero = $3, quantidade = $4 WHERE id = $5",
-      [titulo, autor, genero, quantidade, id]
+      "UPDATE livro SET titulo = $1, autor = $2, genero = $3, quantidade = $4, ano = $5 WHERE id = $6",
+      [titulo, autor, genero, quantidade ?? 0, ano ?? null, id]
     );
 
     if (result.rowCount === 0) {
